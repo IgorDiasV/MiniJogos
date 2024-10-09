@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.tetris-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 20px);
+    grid-template-rows: repeat(20, 20px);
+    gap: 1px;
+    background-color: #111;
+}
+
+.grid div {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+}
