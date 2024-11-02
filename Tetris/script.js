@@ -37,6 +37,7 @@ const hero = [
 
 const pieces = [ricky, z, teewee, smashboy, hero]
 
+let score = 0;
 currentPiece = getPiece()
 currentPosition = 4
 currentRotation = 0
@@ -108,12 +109,47 @@ function possibleMovementRight(){
     return !currentPiece.some(index => squares[currentPosition + index].style.backgroundColor == "white");
 }
 
+function attScore(){
+    document.getElementById("score").textContent = score;
+}
+function checkScore(){
+    cont = 0;
+    aux = 0;
+    for(let i = 0; i < squares.length; i++){
+        if(i%10 == 0){
+            cont = 0;
+            aux = i;
+        }
+
+        if(squares[i].style.backgroundColor == "white"){
+            cont++;
+        }
+
+        if(cont == 10){
+            score += 100;
+            attScore()
+            for(let j = aux; j<= i; j++){
+                squares[j].style.backgroundColor = "black";
+            }
+
+            for(let j = i - 10; j >= 0 ; j--){
+                if(squares[j].style.backgroundColor == "white"){
+                    squares[j].style.backgroundColor = "black";
+                    squares[j + 10].style.backgroundColor = "white";
+                }
+            }
+        }
+
+    }
+}
+
 function moveDown(){
     undraw();
     
     if(!possibleMovementDown()){
         draw();
         currentPosition = 4;
+        checkScore();
         currentPiece = getPiece()
         return;
     }
@@ -158,6 +194,6 @@ function control(e) {
     }
 }
 
-document.addEventListener('keyup', control);
+document.addEventListener('keydown', control);
 
 setInterval(moveDown, 800);
